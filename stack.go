@@ -61,12 +61,14 @@ func LoadStackFromFile(path string) (Stack, error) {
 }
 
 func LoadStack(bytes []byte) (Stack, error) {
-	var m map[string]string
+	var m map[string]interface{}
 
 	// First unmarshal into map to get "type" as string
-	json.Unmarshal(bytes, &m)
+	if err := json.Unmarshal(bytes, &m); err != nil {
+		return nil, err
+	}
 
-	stype := m["kind"]
+	stype := m["kind"].(string)
 	if stype == "" {
 		return nil, fmt.Errorf("Stack kind is required")
 	}
