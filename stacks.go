@@ -92,7 +92,10 @@ func (c *Cluster) BeforeRender() (Context, error) {
 
 func (c *Cluster) Render(ctx Context) (string, error) {
 	t := cf.NewTemplate()
-	t.AddResource("VPC", cf.EC2VPC{CidrBlock: cf.String("10.0.0.0/16")})
+	sn, _ := c.subnets()
+	t.AddResource("AutoscalingGroup", cf.AutoScalingAutoScalingGroup{
+		VPCZoneIdentifier: ToStringList(sn),
+	})
 
 	if buf, err := json.MarshalIndent(t, "", "  "); err != nil {
 		return "", err
