@@ -64,9 +64,8 @@ type LoadBalancer struct {
 }
 
 type Subnets struct {
-	Tag     string   `valid:"optional,ascii" json:"tag"`
-	TagName string   `valid:"optional,ascii" json:"tagName"`
-	Ids     []string `valid:"optional" json:"ids,omitempty"`
+	Tag string   `valid:"optional,ascii" json:"tag"`
+	Ids []string `valid:"optional" json:"ids,omitempty"`
 }
 
 type HealthCheck struct {
@@ -75,16 +74,6 @@ type HealthCheck struct {
 	UnhealthyThreshold string `valid:"numeric" json:"unhealthyThreshold"`
 	Interval           string `valid:"numeric" json:"interval"`
 	Timeout            string `valid:"numeric" json:"timeout"`
-}
-
-func NewCluster() *Cluster {
-	return &Cluster{
-		AutoscalingGroup: AutoscalingGroup{
-			Subnets: Subnets{
-				TagName: "Name",
-			},
-		},
-	}
 }
 
 func (c *Cluster) Validate() (bool, error) {
