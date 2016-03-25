@@ -101,6 +101,14 @@ func (c *Cluster) Render(ctx Context) (string, error) {
 	}
 }
 
+func ToStringList(strings []string) *cf.StringListExpr {
+	stringExprs := []*cf.StringExpr{}
+	for _, s := range strings {
+		stringExprs = append(stringExprs, &cf.StringExpr{Literal: s})
+	}
+	return &cf.StringListExpr{Literal: stringExprs}
+}
+
 func (c *Cluster) subnets() ([]string, error) {
 	if len(c.AutoscalingGroup.Subnets.Ids) > 0 {
 		return c.AutoscalingGroup.Subnets.Ids, nil
