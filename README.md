@@ -1,6 +1,5 @@
 # bossformation
 
-
 [![Build Status](https://travis-ci.org/cloudboss/bossformation.svg?branch=master)](https://travis-ci.org/cloudboss/bossformation)
 
 `bossformation` is a preprocessor that allows [CloudFormation](https://aws.amazon.com/cloudformation/) templates to be written in YAML instead of JSON. In addition to this, templates may contain [Jinja2](http://jinja.pocoo.org/docs/dev/) tags, allowing for dynamic template generation.
